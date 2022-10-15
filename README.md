@@ -9,12 +9,19 @@ A little exercise to build a web application following an agile development proc
 
 ## Product vision statement
 
-A web application where students can make schedule 
+A web application where students can manage their schedules on a monthy and daily basis. 
 
 ## User stories
 
-See instructions. Delete this line and place a link to the user stories here.
+<span>1.</span> As a user, I want to add an event to a certain day  </br>
+<span>2.</span> </br>
+<span>3.</span> </br>
+<span>4.</span> </br>
+<span>5.</span> </br>
+<span>6.</span> </br>
+<span>7.</span> </br>
+<span>8.</span> </br>
 
 ## Task boards
 
-See instructions. Delete this line and place a link to the task boards here.
+[Sprint 1](https://github.com/orgs/software-students-fall2022/projects/21)
