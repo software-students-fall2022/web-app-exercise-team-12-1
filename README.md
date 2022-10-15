@@ -2,8 +2,8 @@
 
 # Team Members
 
-[Brian Lee](https://github.com/shl622)
-[Jiawei Zhang](https://github.com/jiawei-zhang-a)
+[Brian Lee](https://github.com/shl622)\
+[Jiawei Zhang](https://github.com/jiawei-zhang-a)\
 [Darren Le](https://github.com/DarrenLe20)
 
 # Web Application Exercise
