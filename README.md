@@ -4,7 +4,8 @@
 
 [Brian Lee](https://github.com/shl622)\
 [Jiawei Zhang](https://github.com/jiawei-zhang-a)\
-[Darren Le](https://github.com/DarrenLe20)
+[Darren Le](https://github.com/DarrenLe20)\
+[Khalifa AlFalasi](https://github.com/Khalifa-AlFalasi)
 
 # Web Application Exercise
 
@@ -27,5 +28,5 @@ A web application where students can manage schedule on a daily or monthly basis
 
 ## Task boards
 
-[Sprint 1](https://github.com/orgs/software-students-fall2022/projects/21)
+[Sprint 1](https://github.com/orgs/software-students-fall2022/projects/21)\
 [Sprint 2](https://github.com/orgs/software-students-fall2022/projects/22)
