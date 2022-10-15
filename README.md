@@ -28,3 +28,4 @@ A web application where students can manage schedule on a daily or monthly basis
 ## Task boards
 
 [Sprint 1](https://github.com/orgs/software-students-fall2022/projects/21)
+[Sprint 2](https://github.com/orgs/software-students-fall2022/projects/22)
