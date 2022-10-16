@@ -26,23 +26,12 @@ Two Schema, one for user info, the other for user's events
 
 ## Data Model
 
-The application will store Users, and Users' Events
+The application will store Events
 
 * users can have multiple events in dashboard
 * each event can have multiple infomation
 
 
-User:
-
-```javascript
-{
-    userSchema = new mongoose.Schema({
-        username: {type: String, required: true},
-        password: {type: String},
-        events:  [{ type: mongoose.Schema.Types.ObjectId, ref: 'event' }]
-    });
-}
-```
 
 Course:
 
