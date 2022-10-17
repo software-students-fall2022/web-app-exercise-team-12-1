@@ -1,101 +1,86 @@
 import json
 from flask import Flask, request, jsonify, render_template
-from flask_mongoengine import MongoEngine
+import pymongo
 
 app = Flask(__name__)
-app.config["MONGODB_SETTINGS"] = {
-    "db": "shedule", "host": "localhost", "port": 27017}
-db = MongoEngine()
-db.init_app(app)
+app.config['MONGODB_SETTINGS'] = {
+    'db': 'shedule',
+    'host': 'localhost',
+    'port': 27017
+}
 
-
-class Events(db.Document):
-    name = db.StringField()
-    description = db.StringField()
-    status = db.StringField()
-    time = db.StringField()
-    location = db.StringField()
-
-    def to_json(self):
-        return {
-            "name": self.name,
-            "description": self.description,
-            "status": self.status,
-            "time": self.time,
-            "location": self.location,
-        }
+myclient = pymongo.MongoClient("mongodb://localhost:27017/")
+mydb = myclient["shedule"]
+mycol = mydb["events"]
 
 
 # show all the events in homepage
-
-
-@app.route("/", methods=["GET"])
+@app.route('/', methods=['GET'])
 def home_page():
-    events = Events.objects()
-    return render_template("templates/index.html", events=events)
-
+    events = mycol.find({}, projection={"_id": 0}).sort(
+        [("date", pymongo.ASCENDING), ("time", pymongo.ASCENDING)])
+    return render_template("index.html",
+                           events=events)
 
 # create event
 
 
-@app.route("/", methods=["PUT"])
+@app.route('/', methods=['PUT'])
 def create_record():
     record = json.loads(request.data)
-    event = Events(
-        name=record["name"],
-        description=record["description"],
-        status=record["status"],
-        time=record["time"],
-        location=record["location"],
-    )
-    event.save()
-    return jsonify(event.to_json())
-
+    event = {
+        "name": record['name'],
+        "date": record['date'],
+        "status": record["status"],
+        "time": record["time"],
+        "description": record["description"]
+    }
+    x = mycol.insert_one(event)
+    return jsonify(x)
 
 # edit the event
 
 
-@app.route("/", methods=["POST"])
+@app.route('/', methods=['POST'])
 def update_record():
     record = json.loads(request.data)
-    event = Events.objects(name=record["name"]).first()
+    myquery = {"name": record['name']}
+    newvalues = {
+        "$set": {"date": record['date'],
+                 "status": record["status"],
+                 "time": record["time"],
+                 "description": record["description"]}
+    }
+    event = mycol.update_one(myquery, newvalues)
     if not event:
-        return jsonify({"error": "event not found"})
-    else:
-        event.update(email=record["email"])
-    return jsonify(event.to_json())
-
+        return jsonify({'error': 'event not found'})
+    return jsonify(event)
 
 # delete the event
 
 
-@app.route("/", methods=["DELETE"])
+@app.route('/', methods=['DELETE'])
 def delete_record():
     record = json.loads(request.data)
-    event = Events.objects(name=record["name"]).first()
+    myquery = {"name": record['name']}
+    event = mycol.delete_one(myquery)
     if not event:
-        return jsonify({"error": "event not found"})
-    else:
-        event.delete()
-    return jsonify(event.to_json())
-
+        return jsonify({'error': 'event not found'})
+    return jsonify(event)
 
 # search for the event
 
 
-@app.route("/search", methods=["GET"])
+@app.route('/search', methods=['GET'])
 def query_records():
-    name = request.args.get("name")
-    event = Events.objects(name=name).first()
-    if not event:
-        return jsonify({"error": "event not found"})
+    name = request.args.get('name')
+    myquery = {"name": name}
+    events = mycol.find(myquery, projection={"_id": 0})
+    if not events:
+        return jsonify({'error': 'event not found'})
     else:
-        return jsonify(event.to_json())
+        return jsonify(events)
 
 
 if __name__ == "__main__":
-    event = Events(
-        name="123", description="123", status="123", time="123", location="123"
-    )
-    event.save()
     app.run(debug=True)
