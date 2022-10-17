@@ -54,7 +54,7 @@ def update_record():
 
 
 # delete the event
-@app.route('/', methods=['DELETE'])
+@app.route('/delete', methods=['DELETE'])
 def delete_record():
     record = json.loads(request.data)
     myquery = {"name": record['name']}
