@@ -20,46 +20,40 @@ mycol = mydb["events"]
 def home_page():
     events = mycol.find({}, projection={"_id": 0}).sort(
         [("date", pymongo.ASCENDING), ("time", pymongo.ASCENDING)])
-    return render_template("index.html",
-                           events=events)
+    return render_template("index.html", events=events)
+
 
 # create event
-
-
-@app.route('/', methods=['PUT'])
+@app.route('/add', methods=['PUT'])
 def create_record():
     record = json.loads(request.data)
     event = {
         "name": record['name'],
         "date": record['date'],
         "status": record["status"],
-        "time": record["time"],
-        "description": record["description"]
+        "time": record["time"]
     }
     x = mycol.insert_one(event)
     return jsonify(x)
 
+
 # edit the event
-
-
-@app.route('/', methods=['POST'])
+@app.route('/edit', methods=['POST'])
 def update_record():
     record = json.loads(request.data)
     myquery = {"name": record['name']}
     newvalues = {
         "$set": {"date": record['date'],
                  "status": record["status"],
-                 "time": record["time"],
-                 "description": record["description"]}
+                 "time": record["time"]}
     }
     event = mycol.update_one(myquery, newvalues)
     if not event:
         return jsonify({'error': 'event not found'})
     return jsonify(event)
 
+
 # delete the event
-
-
 @app.route('/', methods=['DELETE'])
 def delete_record():
     record = json.loads(request.data)
@@ -69,9 +63,8 @@ def delete_record():
         return jsonify({'error': 'event not found'})
     return jsonify(event)
 
+
 # search for the event
-
-
 @app.route('/search', methods=['GET'])
 def query_records():
     name = request.args.get('name')

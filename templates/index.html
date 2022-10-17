@@ -15,7 +15,43 @@
       <h1>App Name</h1>
     </header>
     <main>
-      <p>Tasks</p>
+      <h2>Your tasks</h2>
+      <!-- Prompt user to enter a new task -->
+      <form action="/add" method="put">
+        <div>
+          <input type="text" name="title" placeholder="Add task?" /> <br />
+          <input type="date" name="task-date" /> <br />
+          <input type="time" name="time" /> <br />
+          <button type="submit">Add Task</button>
+        </div>
+      </form>
+      <!-- Display tasks -->
+      <div class="task-table">
+        <table class="table">
+          <!-- Table header -->
+          <thead>
+            <tr>
+              <th class="task-id">ID</th>
+              <th class="task-name">Task</th>
+              <th class="due-time">Time</th>
+              <th class="due-date">Date</th>
+              <th class="edit">Edit</th>
+              <th class="delete">Delete</th>
+            </tr>
+          </thead>
+          <!-- Table body -->
+          <tbody>
+            {% for task in tasks %}
+            <tr>
+              <td>{{ task.id }}</td>
+              <td>{{ task.name }}</td>
+              <td>{{ task.time }}</td>
+              <td>{{ task.date }}</td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
     </main>
   </body>
 </html>

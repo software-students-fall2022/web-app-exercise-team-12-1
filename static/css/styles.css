@@ -15,3 +15,43 @@ body {
   margin: 0;
   padding: 0;
 }
+
+body h2 {
+  text-align: center;
+}
+
+form { 
+  margin: auto; 
+  text-align: center;
+  padding-bottom: 20px;
+  width:150px;
+}
+
+input {
+  margin-bottom: 10px;
+}
+
+.task-table {
+  margin: auto;
+  table-layout: fixed;
+}
+
+th.task-id {
+  width: 30px;
+}
+
+th.task-name {
+  width: 110px;
+}
+
+th.due-time {
+  width: 50px;
+}
+
+th.due-date {
+  width: 60px;
+}
+
+th.edit, th.delete {
+  width: 50px;
+}
