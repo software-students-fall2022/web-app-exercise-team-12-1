@@ -6,19 +6,17 @@
 ### Prerequisites
 Below noted things you need to install to run this project in your system
 
-- Node.js
-- NPM
-- MongoDB
+- pip install flask
+- pip install flask_mongoengine
 
 ### To Setup
 Clone or download this repository
 
 1. `cd ./backend`
-2. `npm install`
 
 ### To Run
 To run node server
-1. `nodemon server.js`
+1. `python server.js`
 
 
 ## Overview
