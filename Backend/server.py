@@ -17,7 +17,7 @@ mycol = mydb["events"]
 #show all the events in homepage
 @app.route('/', methods=['GET'])
 def home_page():
-    events =  mycol.find().sort([("date", pymongo.ASCENDING), ("time", pymongo.ASCENDING)])
+    events =  mycol.find({},projection={"_id":0}).sort([("date", pymongo.ASCENDING), ("time", pymongo.ASCENDING)])
     render_template("templates/index.html",
         events=events)
 
@@ -66,7 +66,7 @@ def delete_record():
 def query_records():
     name = request.args.get('name')
     myquery = { "name": name }
-    events = mycol.find(myquery)
+    events = mycol.find(myquery,projection={"_id":0})
     if not events:
         return jsonify({'error': 'event not found'})
     else:
