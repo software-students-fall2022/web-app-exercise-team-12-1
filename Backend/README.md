@@ -1,6 +1,5 @@
 ##### Backend
-- API to register and login user.
-- API using which loged in user can add, edit and update it's event.
+- User can add, delete, edit and search it's events.
 
 
 ### Prerequisites
@@ -8,7 +7,11 @@ Below noted things you need to install to run this project in your system
 
 - pip install flask
 - pip install flask_mongoengine
+- pip install pymongo
 
+- Install mongoDB
+- brew services start mongodb-community@6.0
+  
 ### To Setup
 Clone or download this repository
 
@@ -20,18 +23,17 @@ To run node server
 
 
 ## Overview
-Two Schema, one for user info, the other for user's events
+Listening on localhost:5000
 
 ## Data Model
 
 The application will store Events
 
-* users can have multiple events in dashboard
+* user can have multiple events in dashboard
 * each event can have multiple infomation
 
 
-
-Course:
+Event:
 
 ```javascript
 {
@@ -40,6 +42,7 @@ Course:
         description: {type: String},
         status: {type: String},
         time: {type: String},
+        date:{type: String},
         location: {type: String}
     });
 }
