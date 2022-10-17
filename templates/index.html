@@ -41,12 +41,12 @@
           </thead>
           <!-- Table body -->
           <tbody>
-            {% for task in tasks %}
+            {% for event in events %}
             <tr>
-              <td>{{ task.id }}</td>
-              <td>{{ task.name }}</td>
-              <td>{{ task.time }}</td>
-              <td>{{ task.date }}</td>
+              <td>{{ event["id"] }}</td>
+              <td>{{ event["name"] }}</td>
+              <td>{{ event["time"] }}</td>
+              <td>{{ eventt["date"] }}</td>
             </tr>
             {% endfor %}
           </tbody>
