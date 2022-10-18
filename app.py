@@ -39,10 +39,10 @@ def create_record():
 
 
 # edit the event
-@ app.route('/', methods=['POST'])
-def update_record():
+@ app.route('/update_record/<event_name>', methods=['POST'])
+def update_record(event_name):
     record = json.loads(request.data)
-    myquery = {"name": record['name']}
+    myquery = {"name": event_name}
     newvalues = {
         "$set": {"date": record["date"],
                  "status": record["status"],
@@ -55,18 +55,16 @@ def update_record():
 
 
 # delete the event
-@ app.route('/', methods=['DELETE'])
-def delete_record():
-    record = json.loads(request.data)
-    myquery = {"name": record['name']}
-    event = mycol.delete_one(myquery)
+@ app.route('/delete_record/<event_name>', methods=['GET', 'POST'])
+def delete_record(event_name):
+    event = mycol.delete_one({"name": event_name})
     if not event:
         return jsonify({'error': 'event not found'})
     return redirect(url_for('home_page'))
 
 
 # delete all the events (for testing purpose)
-@ app.route('/clear', methods=['GET'])
+@ app.route('/clear')
 def delete_all():
     mycol.delete_many({})
     return redirect(url_for('home_page'))
