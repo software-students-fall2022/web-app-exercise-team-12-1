@@ -36,10 +36,6 @@ input {
   table-layout: fixed;
 }
 
-th.task-id {
-  width: 30px;
-}
-
 th.task-name {
   width: 110px;
 }
@@ -49,9 +45,13 @@ th.due-time {
 }
 
 th.due-date {
-  width: 60px;
+  width: 100px;
 }
 
 th.edit, th.delete {
   width: 50px;
+}
+
+.display-date, .display-time, .edit, .delete {
+  text-align: center;
 }

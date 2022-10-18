@@ -1,6 +1,8 @@
 import json
 from flask import Flask, request, redirect, jsonify, render_template, url_for
 import pymongo
+import sys
+import logging
 
 
 app = Flask(__name__)
@@ -55,18 +57,16 @@ def update_record():
 
 
 # delete the event
-@ app.route('/', methods=['DELETE'])
-def delete_record():
-    record = json.loads(request.data)
-    myquery = {"name": record['name']}
-    event = mycol.delete_one(myquery)
+@ app.route('/delete_record/<event_name>', methods=['GET', 'POST'])
+def delete_record(event_name):
+    event = mycol.delete_one({"name": event_name})
     if not event:
         return jsonify({'error': 'event not found'})
     return redirect(url_for('home_page'))
 
 
 # delete all the events (for testing purpose)
-@ app.route('/clear', methods=['GET'])
+@ app.route('/clear')
 def delete_all():
     mycol.delete_many({})
     return redirect(url_for('home_page'))

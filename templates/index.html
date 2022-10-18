@@ -16,22 +16,12 @@
     </header>
     <main>
       <h2>Your tasks</h2>
-      <!-- Prompt user to enter a new task -->
-      <form action="{{ url_for('create_record') }}" method="POST" role="form">
-        <div>
-          <input type="text" name="name" placeholder="Add task?" /> <br />
-          <input type="date" name="task-date" /> <br />
-          <input type="time" name="task-time" /> <br />
-          <button type="submit">Add Task</button>
-        </div>
-      </form>
       <!-- Display tasks -->
       <div class="task-table">
         <table class="table">
           <!-- Table header -->
           <thead>
             <tr>
-              <th class="task-id">ID</th>
               <th class="task-name">Task</th>
               <th class="due-time">Time</th>
               <th class="due-date">Date</th>
@@ -43,15 +33,40 @@
           <tbody>
             {% for event in events %}
             <tr>
-              <td>{{ event["id"] }}</td>
-              <td>{{ event["name"] }}</td>
-              <td>{{ event["time"] }}</td>
-              <td>{{ event["date"] }}</td>
+              <td class="display-name">{{ event["name"] }}</td>
+              <td class="display-time">{{ event["time"] }}</td>
+              <td class="display-date">{{ event["date"] }}</td>
+              <!-- Delete and Edit button -->
+              <td class="edit">
+                <a
+                  href="{{ url_for('update_record', event_name=event['name']) }}"
+                >
+                  <input type="submit" name="edit_bun" value="Edit" />
+                </a>
+              </td>
+              <td class="delete">
+                <a
+                  href="{{ url_for('delete_record', event_name=event['name']) }}"
+                >
+                  <input type="submit" name="delete-btn" value="Del" />
+                </a>
+              </td>
             </tr>
+
             {% endfor %}
           </tbody>
         </table>
-        <a href="{{ url_for('delete_all') }}">Delete All</a>
+        <!-- Delete all button -->
+        <a id="delete-all-btn" href="{{ url_for('delete_all') }}">Delete All</a>
+        <!-- Prompt user to enter a new task -->
+        <form action="{{ url_for('create_record') }}" method="POST" role="form">
+          <div>
+            <input type="text" name="name" placeholder="Add task?" /> <br />
+            <input type="date" name="task-date" /> <br />
+            <input type="time" name="task-time" /> <br />
+            <button type="submit">Add Task</button>
+          </div>
+        </form>
       </div>
     </main>
   </body>
