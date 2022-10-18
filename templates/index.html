@@ -17,11 +17,11 @@
     <main>
       <h2>Your tasks</h2>
       <!-- Prompt user to enter a new task -->
-      <form action="/add" method="put">
+      <form action="{{ url_for('create_record') }}" method="POST" role="form">
         <div>
-          <input type="text" name="title" placeholder="Add task?" /> <br />
+          <input type="text" name="name" placeholder="Add task?" /> <br />
           <input type="date" name="task-date" /> <br />
-          <input type="time" name="time" /> <br />
+          <input type="time" name="task-time" /> <br />
           <button type="submit">Add Task</button>
         </div>
       </form>
@@ -51,6 +51,7 @@
             {% endfor %}
           </tbody>
         </table>
+        <a href="{{ url_for('delete_all') }}">Delete All</a>
       </div>
     </main>
   </body>
