@@ -1,8 +1,6 @@
 import json
 from flask import Flask, request, redirect, jsonify, render_template, url_for
 import pymongo
-import sys
-import logging
 
 
 app = Flask(__name__)
@@ -41,10 +39,10 @@ def create_record():
 
 
 # edit the event
-@ app.route('/', methods=['POST'])
-def update_record():
+@ app.route('/update_record/<event_name>', methods=['POST'])
+def update_record(event_name):
     record = json.loads(request.data)
-    myquery = {"name": record['name']}
+    myquery = {"name": event_name}
     newvalues = {
         "$set": {"date": record["date"],
                  "status": record["status"],
