@@ -1,6 +1,7 @@
 import json
-from flask import Flask, request, jsonify, render_template
+from flask import Flask, request, redirect, jsonify, render_template, url_for
 import pymongo
+
 
 app = Flask(__name__)
 app.static_folder = 'static'
@@ -24,48 +25,55 @@ def home_page():
 
 
 # create event
-@app.route('/add', methods=['PUT'])
+@app.route('/', methods=['POST'])
 def create_record():
-    record = json.loads(request.data)
+    # record = json.loads(request.data)
     event = {
-        "name": record['name'],
-        "date": record['date'],
-        "status": record["status"],
-        "time": record["time"]
+        "name":  request.form['name'],
+        "date":  request.form['task-date'],
+        "status": "active",
+        "time":  request.form['task-time']
     }
-    x = mycol.insert_one(event)
-    return jsonify(x)
+    mycol.insert_one(event)
+    return redirect(url_for('home_page'))
 
 
 # edit the event
-@app.route('/edit', methods=['POST'])
+@ app.route('/', methods=['POST'])
 def update_record():
     record = json.loads(request.data)
     myquery = {"name": record['name']}
     newvalues = {
-        "$set": {"date": record['date'],
+        "$set": {"date": record["date"],
                  "status": record["status"],
                  "time": record["time"]}
     }
     event = mycol.update_one(myquery, newvalues)
     if not event:
         return jsonify({'error': 'event not found'})
-    return jsonify(event)
+    return redirect(url_for('home_page'))
 
 
 # delete the event
-@app.route('/delete', methods=['DELETE'])
+@ app.route('/', methods=['DELETE'])
 def delete_record():
     record = json.loads(request.data)
     myquery = {"name": record['name']}
     event = mycol.delete_one(myquery)
     if not event:
         return jsonify({'error': 'event not found'})
-    return jsonify(event)
+    return redirect(url_for('home_page'))
+
+
+# delete all the events (for testing purpose)
+@ app.route('/clear', methods=['GET'])
+def delete_all():
+    mycol.delete_many({})
+    return redirect(url_for('home_page'))
 
 
 # search for the event
-@app.route('/search', methods=['GET'])
+@ app.route('/search', methods=['GET'])
 def query_records():
     name = request.args.get('name')
     myquery = {"name": name}
