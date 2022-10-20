@@ -32,6 +32,7 @@
           <!-- Table body -->
           <tbody>
             {% for event in events %}
+            <pre>{{event}}</pre>
             <tr>
               <td class="display-name">{{ event["name"] }}</td>
               <td class="display-time">{{ event["time"] }}</td>
@@ -69,5 +70,9 @@
         </form>
       </div>
     </main>
+    <!-- <script type="text/javascript">
+      const events = "{{events}}"
+    </script> -->
+    <script src = "{{ url_for('static', filename='js/index.js') }}"></script>
   </body>
 </html>

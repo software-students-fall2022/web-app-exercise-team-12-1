@@ -11,7 +11,9 @@ app.config['MONGODB_SETTINGS'] = {
     'port': 27017
 }
 
-myclient = pymongo.MongoClient("mongodb://localhost:27017/")
+##read connection string from env file
+##db username,pw remove
+myclient = pymongo.MongoClient()
 mydb = myclient["shedule"]
 mycol = mydb["events"]
 
