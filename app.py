@@ -29,14 +29,15 @@ def home_page():
 # create event
 @app.route('/', methods=['POST'])
 def create_record():
-    # record = json.loads(request.data)
     event = {
         "name":  request.form['name'],
         "date":  request.form['task-date'],
         "status": "active",
         "time":  request.form['task-time']
     }
-    mycol.insert_one(event)
+    x = mycol.insert_one(event)
+    if not x:
+        return jsonify({"message": "Error occured"}), 500
     return redirect(url_for('home_page'))
 
 
