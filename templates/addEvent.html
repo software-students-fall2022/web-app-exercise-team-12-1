@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/styles.css') }}"
+    />
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  </head>
+  <body>
+    <form action="{{ url_for('create_record') }}" method="POST" role="form">
+        <div>
+          <input type="text" name="name" placeholder="Add task?" /> <br />
+          <input type="date" name="task-date" /> <br />
+          <input type="time" name="task-time" /> <br />
+          <button type="submit">Add Task</button>
+        </div>
+      </form>
+  </body>
+</html>

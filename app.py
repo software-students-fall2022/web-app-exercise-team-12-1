@@ -1,7 +1,7 @@
+from asyncio import events
 import json
 from flask import Flask, request, redirect, jsonify, render_template, url_for
 import pymongo
-
 
 app = Flask(__name__)
 app.static_folder = 'static'
@@ -17,17 +17,30 @@ myclient = pymongo.MongoClient()
 mydb = myclient["shedule"]
 mycol = mydb["events"]
 
+# view options/home page 
+@app.route('/',methods=['GET'])
+def select_modes():
+    return render_template("home.html")
 
-# show all the events in homepage
-@app.route('/', methods=['GET'])
-def home_page():
+#view in task list page
+@app.route('/task_view',methods=['GET'])
+def show_tasks():
+    return render_template("taskView.html")
+
+#view in calendar
+@app.route('/calendar_view',methods=['GET'])
+def show_calendar():
+    return render_template("calendarView.html")
+
+# add event(get)
+@app.route('/add_event', methods=['GET'])
+def add_task():
     events = mycol.find({}, projection={"_id": 0}).sort(
         [("date", pymongo.ASCENDING), ("time", pymongo.ASCENDING)])
-    return render_template("index.html", events=events)
+    return render_template("addEvent.html", events=events)
 
-
-# create event
-@app.route('/', methods=['POST'])
+# add event(post)
+@app.route('/add_event', methods=['POST'])
 def create_record():
     event = {
         "name":  request.form['name'],
@@ -38,8 +51,7 @@ def create_record():
     x = mycol.insert_one(event)
     if not x:
         return jsonify({"message": "Error occured"}), 500
-    return redirect(url_for('home_page'))
-
+    return redirect(url_for('show_tasks'))
 
 # edit the event
 @ app.route('/update_record/<event_name>', methods=['POST'])

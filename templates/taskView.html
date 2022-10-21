@@ -8,7 +8,6 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Task Scheduling App</title>
   </head>
   <body>
     <header>
@@ -17,6 +16,13 @@
     <main>
       <h2>Your tasks</h2>
       <!-- Display tasks -->
+      <div class="add_new_btn">
+        <a href="{{ url_for('add_task') }}">
+          <button class="btn">
+            Add new task
+          </button>
+        </a>
+      </div>
       <div class="task-table">
         <table class="table">
           <!-- Table header -->
@@ -53,26 +59,13 @@
                 </a>
               </td>
             </tr>
-
             {% endfor %}
           </tbody>
         </table>
         <!-- Delete all button -->
         <a id="delete-all-btn" href="{{ url_for('delete_all') }}">Delete All</a>
-        <!-- Prompt user to enter a new task -->
-        <form action="{{ url_for('create_record') }}" method="POST" role="form">
-          <div>
-            <input type="text" name="name" placeholder="Add task?" /> <br />
-            <input type="date" name="task-date" /> <br />
-            <input type="time" name="task-time" /> <br />
-            <button type="submit">Add Task</button>
-          </div>
-        </form>
       </div>
     </main>
-    <!-- <script type="text/javascript">
-      const events = "{{events}}"
-    </script> -->
     <script src = "{{ url_for('static', filename='js/index.js') }}"></script>
   </body>
 </html>

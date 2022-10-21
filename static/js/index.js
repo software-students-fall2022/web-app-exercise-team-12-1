@@ -8,7 +8,6 @@ function getFirstDay(year,month){
     return new Date(year,month,1).getDay();
 }
 
-
 //static months array
 const months = [
     {longname :"January", shortname : "Jan"},
@@ -50,7 +49,6 @@ const calendarData = yearsArray.map(year =>{
     return {year,months:renderMonths(year)}
 });
 
-console.log(calendarData);
 
 /*
 [{}{}]

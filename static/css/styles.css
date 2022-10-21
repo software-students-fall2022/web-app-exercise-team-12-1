@@ -55,3 +55,20 @@ th.edit, th.delete {
 .display-date, .display-time, .edit, .delete {
   text-align: center;
 }
+
+.tasks{
+  margin: auto;
+  text-align: center;
+}
+
+.btn{
+  background-color: white;
+            border: 2px solid black;
+            color: green;
+            padding: 5px 10px;
+            text-align: center;
+            display: inline-block;
+            font-size: 20px;
+            margin: 10px 30px;
+            cursor: pointer;
+}
