@@ -13,19 +13,34 @@ app.config['MONGODB_SETTINGS'] = {
 
 ##read connection string from env file
 ##db username,pw remove
-myclient = pymongo.MongoClient()
+myclient = pymongo.MongoClient("mongodb+srv://shl622:Dltjdgus97!@cluster0.kakayag.mongodb.net/?retryWrites=true&w=majority")
 mydb = myclient["shedule"]
 mycol = mydb["events"]
 
 # view options/home page 
 @app.route('/',methods=['GET'])
-def select_modes():
+def home_page():
     return render_template("home.html")
 
-#view in task list page
-@app.route('/task_view',methods=['GET'])
-def show_tasks():
-    return render_template("taskView.html")
+#view upcoming homework
+@app.route('/view_homework',methods=['GET'])
+def show_homework():
+    return render_template("homework.html")
+
+#view upcoming exams
+@app.route('/view_exam',methods=['GET'])
+def show_exam():
+    return render_template("exam.html")
+
+#view upcoming interviews
+@app.route('/view_interview',methods=['GET'])
+def show_interview():
+    return render_template("interview.html")
+
+#view upcoming misc
+@app.route('/view_misc',methods=['GET'])
+def show_misc():
+    return render_template("misc.html")
 
 #view in calendar
 @app.route('/calendar_view',methods=['GET'])
@@ -37,7 +52,7 @@ def show_calendar():
 def add_task():
     events = mycol.find({}, projection={"_id": 0}).sort(
         [("date", pymongo.ASCENDING), ("time", pymongo.ASCENDING)])
-    return render_template("addEvent.html", events=events)
+    return render_template("addevent.html", events=events)
 
 # add event(post)
 @app.route('/add_event', methods=['POST'])
@@ -46,12 +61,13 @@ def create_record():
         "name":  request.form['name'],
         "date":  request.form['task-date'],
         "status": "active",
-        "time":  request.form['task-time']
+        "time":  request.form['task-time'],
+        "tag": request.form['task-tag']
     }
     x = mycol.insert_one(event)
     if not x:
         return jsonify({"message": "Error occured"}), 500
-    return redirect(url_for('show_tasks'))
+    return redirect(url_for('home_page'))
 
 # edit the event
 @ app.route('/update_record/<event_name>', methods=['POST'])

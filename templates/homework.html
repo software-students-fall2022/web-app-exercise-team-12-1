@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}"/>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.0/css/fontawesome.min.css" integrity="sha384-z4tVnCr80ZcL0iufVdGQSUzNvJsKjEtqYZjiQrrYKlpGow+btDHDfQWkFjoaz/Zr" crossorigin="anonymous">
+        <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+        <title>Home Page</title>
+    </head>
+    <body>
+        <div class="content">
+            <tbody>
+                {% for event in events %}
+                <pre>{{event}}</pre>
+                <tr>
+                  <td class="display-name">{{ event["name"] }}</td>
+                  <td class="display-time">{{ event["time"] }}</td>
+                  <td class="display-date">{{ event["date"] }}</td>
+                  <!-- Delete and Edit button -->
+                  <td class="edit">
+                    <a
+                      href="{{ url_for('update_record', event_name=event['name']) }}"
+                    >
+                      <input type="submit" name="edit_bun" value="Edit" />
+                    </a>
+                  </td>
+                  <td class="delete">
+                    <a
+                      href="{{ url_for('delete_record', event_name=event['name']) }}"
+                    >
+                      <input type="submit" name="delete-btn" value="Del" />
+                    </a>
+                  </td>
+                </tr>
+                {% endfor %}
+              </tbody>
+        </div>
+    </body>
+</html>
