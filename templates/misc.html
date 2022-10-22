@@ -8,7 +8,7 @@
         <th class="due-time">Time</th>
         <th class="due-date">Date</th>
         <th class="edit-btn">Edit</th>
-        <th class="del-btn">Delete</th>
+        <th class="del-btn">Del</th>
       </tr>
     </thead>
     <tbody>
@@ -20,12 +20,22 @@
         <!-- Delete and Edit button -->
         <td class="edit">
           <a href="{{ url_for('update_record', event_name=event['name']) }}">
-            <input type="submit" name="edit_bun" value="Edit" />
+            <input
+              class="edit-img"
+              type="image"
+              src="{{ url_for('static', filename='icons/edit button.png') }}"
+              name="edit_bun"
+            />
           </a>
         </td>
         <td class="delete">
           <a href="{{ url_for('delete_record', event_name=event['name']) }}">
-            <input type="submit" name="delete-btn" value="Del" />
+            <input
+              class="del-img"
+              type="image"
+              src="{{ url_for('static', filename='icons/delete button.png') }}"
+              name="delete-btn"
+            />
           </a>
         </td>
       </tr>
