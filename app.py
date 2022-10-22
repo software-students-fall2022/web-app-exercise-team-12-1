@@ -34,7 +34,7 @@ def home_page():
 @app.route('/view_homework', methods=['GET'])
 def show_homework():
     events = mycol.find({"tag": "homework"}, projection={"_id": 0}).sort(
-        [("date", pymongo.ASCENDING), ("time", pymongo.ASCENDING)]).limit(3)
+        [("date", pymongo.ASCENDING), ("time", pymongo.ASCENDING)])
     return render_template("homework.html", events=events)
 
 # view upcoming exams
@@ -42,21 +42,27 @@ def show_homework():
 
 @app.route('/view_exam', methods=['GET'])
 def show_exam():
-    return render_template("exam.html")
+    events = mycol.find({"tag": "exam"}, projection={"_id": 0}).sort(
+        [("date", pymongo.ASCENDING), ("time", pymongo.ASCENDING)])
+    return render_template("exam.html", events=events)
 
 # view upcoming interviews
 
 
 @app.route('/view_interview', methods=['GET'])
 def show_interview():
-    return render_template("interview.html")
+    events = mycol.find({"tag": "interview"}, projection={"_id": 0}).sort(
+        [("date", pymongo.ASCENDING), ("time", pymongo.ASCENDING)])
+    return render_template("interview.html", events=events)
 
 # view upcoming misc
 
 
 @app.route('/view_misc', methods=['GET'])
 def show_misc():
-    return render_template("misc.html")
+    events = mycol.find({"tag": "misc"}, projection={"_id": 0}).sort(
+        [("date", pymongo.ASCENDING), ("time", pymongo.ASCENDING)])
+    return render_template("misc.html", events=events)
 
 #view in calendar
 
