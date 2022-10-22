@@ -1,103 +1,63 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link
-      rel="stylesheet"
-      href="{{ url_for('static', filename='css/styles.css') }}"
-    />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
-    />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Roboto&display=swap"
-      rel="stylesheet"
-    />
-    <title>Home Page</title>
-  </head>
-  <body>
-    <div class="content">
-      <header class="home-header">
-        <div class="container">
-          <img src="/static/icons/logo.png" alt="" class="logo" />
-          <form
-            class="search"
-            action="{{ url_for('query_records') }}"
-            style="margin: auto; max-width: 300px"
-          >
-            <input type="text" placeholder="Search.." />
-            <button type="submit"><i class="fa fa-search"></i></button>
-          </form>
-        </div>
-      </header>
-
-      <div class="grid container">
-        <div class="item">
-          <a href="{{ url_for('show_homework') }}"><h4>Homework</h4></a>
-          <p></p>
-          <img src="/static/icons/homework.png" alt="" />
-        </div>
-        <div class="item">
-          <a href="{{ url_for('show_exam') }}"><h4>Exams</h4></a>
-          <p></p>
-          <img src="/static/icons/exam.png" alt="" />
-        </div>
-        <div class="item">
-          <a href="{{ url_for('show_interview') }}"><h4>Interviews</h4></a>
-          <p></p>
-          <img src="/static/icons/interview.png" alt="" />
-        </div>
-        <div class="item">
-          <a href="{{ url_for('show_misc') }}"><h4>Misc</h4></a>
-          <p></p>
-          <img src="/static/icons/misc.png" alt="" />
-        </div>
-      </div>
+{% extends "base.html" %} {%block header %}
+<div class="content">
+  <header class="home-header">
+    <div class="container">
+      <img src="/static/icons/logo.png" alt="" class="logo" />
+      <form
+        class="search"
+        action="{{ url_for('query_records') }}"
+        style="margin: auto; max-width: 300px"
+      >
+        <input type="text" placeholder="Search.." />
+        <button type="submit"><i class="fa fa-search"></i></button>
+      </form>
     </div>
+  </header>
 
-    <!-- List all tasks (FOR TESTING AND TRACKING)-->
-    <table class="task-table" rules="groups">
-      <h2 id="upcoming-task">Due soon:</h2>
-      <thead style="border: 2px solid black">
-        <tr>
-          <th class="task-name">Task</th>
-          <th class="due-time">Time</th>
-          <th class="due-date">Date</th>
-        </tr>
-      </thead>
-      <tbody>
-        {% for event in events %}
-        <tr class="list-all-events">
-          <td class="display-name">{{ event["name"] }}</td>
-          <td class="display-time">{{ event["time"] }}</td>
-          <td class="display-date">{{ event["date"] }}</td>
-        </tr>
-        {% endfor %}
-      </tbody>
-    </table>
-
-    <footer class="home-footer">
-      <ul>
-        <li>
-          <a href="{{ url_for('home_page') }}"><i class="fa fa-home"></i></a>
-          Home
-        </li>
-        <li>
-          <a href="{{ url_for('add_task')}}"
-            ><i class="fa fa-plus" aria-hidden="true"></i
-          ></a>
-          Add Task
-        </li>
-        <li>
-          <a href="{{ url_for('show_calendar') }}">
-            <i class="fa fa-calendar"></i
-          ></a>
-          Calendar
-        </li>
-      </ul>
-    </footer>
-  </body>
-</html>
+  <div class="grid container">
+    <div class="item">
+      <a href="{{ url_for('show_homework') }}"><h4>Homework</h4></a>
+      <p></p>
+      <img src="/static/icons/homework.png" alt="" />
+    </div>
+    <div class="item">
+      <a href="{{ url_for('show_exam') }}"><h4>Exams</h4></a>
+      <p></p>
+      <img src="/static/icons/exam.png" alt="" />
+    </div>
+    <div class="item">
+      <a href="{{ url_for('show_interview') }}"><h4>Interviews</h4></a>
+      <p></p>
+      <img src="/static/icons/interview.png" alt="" />
+    </div>
+    <div class="item">
+      <a href="{{ url_for('show_misc') }}"><h4>Misc</h4></a>
+      <p></p>
+      <img src="/static/icons/misc.png" alt="" />
+    </div>
+  </div>
+</div>
+{% endblock %} {% block content %}
+<!-- List all tasks (FOR TESTING AND TRACKING)-->
+<table class="task-table" rules="groups">
+  <h2 id="upcoming-task">Due soon:</h2>
+  <thead style="border: 2px solid black">
+    <tr>
+      <th class="task-name">Task</th>
+      <th class="due-time">Time</th>
+      <th class="due-date">Date</th>
+      <th class="task-cat">Category</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for event in events %}
+    <tr class="list-all-events">
+      <td class="display-name">{{ event["name"] }}</td>
+      <td class="display-time">{{ event["time"] }}</td>
+      <td class="display-date">{{ event["date"] }}</td>
+      <td class="display-tag">{{ event["tag"] }}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}

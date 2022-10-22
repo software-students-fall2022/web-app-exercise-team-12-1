@@ -190,11 +190,12 @@ form.search::after{
 
 #upcoming-task {
   margin: 10px;
+  margin-top: 5px;
 }
 
 .task-table {
   margin: auto;
-  margin-bottom: 20px;
+  margin-bottom: 10px;
 }
 
 th {
@@ -202,17 +203,22 @@ th {
 }
 
 .display-name {
-  width: 110px;
+  width: 100px;
 }
 
 .display-time {
-  width: 100px;
+  width: 80px;
   text-align: center;
 }
 
 .display-date {
   width: 100px;
   text-align: center;
+}
+
+.display-tag {
+  width: 90px;
+  text-align: right;
 }
 
 .home-footer {
