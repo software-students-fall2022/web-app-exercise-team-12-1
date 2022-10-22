@@ -204,11 +204,15 @@ thead{
 }
 
 
-.display-name, .task-name {
+.main-display-name, .task-name {
   max-width: 100px;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+}
+
+.display-name {
+  max-width: 100px;
 }
 
 .display-time, .due-time {
@@ -232,7 +236,7 @@ thead{
 }
 
 .del-btn, .edit-btn, .edit, .delete {
-  width: 90px;
+  width: 30px;
   text-align: center;
 }
 
