@@ -1,7 +1,7 @@
+from asyncio import events
 import json
 from flask import Flask, request, redirect, jsonify, render_template, url_for
 import pymongo
-
 
 app = Flask(__name__)
 app.static_folder = 'static'
@@ -11,33 +11,63 @@ app.config['MONGODB_SETTINGS'] = {
     'port': 27017
 }
 
-myclient = pymongo.MongoClient("mongodb://localhost:27017/")
+##read connection string from env file
+##db username,pw remove
+myclient = pymongo.MongoClient()
 mydb = myclient["shedule"]
 mycol = mydb["events"]
 
-
-# show all the events in homepage
-@app.route('/', methods=['GET'])
+# view options/home page 
+@app.route('/',methods=['GET'])
 def home_page():
+    return render_template("home.html")
+
+#view upcoming homework
+@app.route('/view_homework',methods=['GET'])
+def show_homework():
+    return render_template("homework.html")
+
+#view upcoming exams
+@app.route('/view_exam',methods=['GET'])
+def show_exam():
+    return render_template("exam.html")
+
+#view upcoming interviews
+@app.route('/view_interview',methods=['GET'])
+def show_interview():
+    return render_template("interview.html")
+
+#view upcoming misc
+@app.route('/view_misc',methods=['GET'])
+def show_misc():
+    return render_template("misc.html")
+
+#view in calendar
+@app.route('/calendar_view',methods=['GET'])
+def show_calendar():
+    return render_template("calendarView.html")
+
+# add event(get)
+@app.route('/add_event', methods=['GET'])
+def add_task():
     events = mycol.find({}, projection={"_id": 0}).sort(
         [("date", pymongo.ASCENDING), ("time", pymongo.ASCENDING)])
-    return render_template("index.html", events=events)
+    return render_template("addevent.html", events=events)
 
-
-# create event
-@app.route('/', methods=['POST'])
+# add event(post)
+@app.route('/add_event', methods=['POST'])
 def create_record():
     event = {
         "name":  request.form['name'],
         "date":  request.form['task-date'],
         "status": "active",
-        "time":  request.form['task-time']
+        "time":  request.form['task-time'],
+        "tag": request.form['task-tag']
     }
     x = mycol.insert_one(event)
     if not x:
         return jsonify({"message": "Error occured"}), 500
     return redirect(url_for('home_page'))
-
 
 # edit the event
 @ app.route('/update_record/<event_name>', methods=['POST'])
