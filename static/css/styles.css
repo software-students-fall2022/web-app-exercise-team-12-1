@@ -196,22 +196,27 @@ form.search::after{
 .task-table {
   margin: auto;
   margin-bottom: 10px;
+  border-collapse: collapse;
 }
 
-th {
-  font-weight: bolder;
+thead{
+  border-bottom: 1px solid black;
 }
 
-.display-name {
-  width: 100px;
+
+.display-name, .task-name {
+  max-width: 100px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
-.display-time {
+.display-time, .due-time {
   width: 80px;
   text-align: center;
 }
 
-.display-date {
+.display-date, .due-date {
   width: 100px;
   text-align: center;
 }
@@ -219,6 +224,16 @@ th {
 .display-tag {
   width: 90px;
   text-align: right;
+}
+
+.task-cat {
+  width: 90px;
+  text-align: center;
+}
+
+.del-btn, .edit-btn, .edit, .delete {
+  width: 90px;
+  text-align: center;
 }
 
 .home-footer {

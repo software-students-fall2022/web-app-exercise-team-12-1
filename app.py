@@ -1,5 +1,6 @@
 from asyncio import events
 import json
+from multiprocessing import Event
 from django.shortcuts import render
 from flask import Flask, request, redirect, jsonify, render_template, url_for
 import pymongo
@@ -32,28 +33,36 @@ def home_page():
 
 @app.route('/view_homework', methods=['GET'])
 def show_homework():
-    return render_template("homework.html")
+    events = mycol.find({"tag": "homework"}, projection={"_id": 0}).sort(
+        [("date", pymongo.ASCENDING), ("time", pymongo.ASCENDING)])
+    return render_template("homework.html", events=events)
 
 # view upcoming exams
 
 
 @app.route('/view_exam', methods=['GET'])
 def show_exam():
-    return render_template("exam.html")
+    events = mycol.find({"tag": "exam"}, projection={"_id": 0}).sort(
+        [("date", pymongo.ASCENDING), ("time", pymongo.ASCENDING)])
+    return render_template("exam.html", events=events)
 
 # view upcoming interviews
 
 
 @app.route('/view_interview', methods=['GET'])
 def show_interview():
-    return render_template("interview.html")
+    events = mycol.find({"tag": "interview"}, projection={"_id": 0}).sort(
+        [("date", pymongo.ASCENDING), ("time", pymongo.ASCENDING)])
+    return render_template("interview.html", events=events)
 
 # view upcoming misc
 
 
 @app.route('/view_misc', methods=['GET'])
 def show_misc():
-    return render_template("misc.html")
+    events = mycol.find({"tag": "misc"}, projection={"_id": 0}).sort(
+        [("date", pymongo.ASCENDING), ("time", pymongo.ASCENDING)])
+    return render_template("misc.html", events=events)
 
 #view in calendar
 
