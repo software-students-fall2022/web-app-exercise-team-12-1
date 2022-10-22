@@ -23,7 +23,9 @@ mycol = mydb["events"]
 
 @app.route('/', methods=['GET'])
 def home_page():
-    return render_template("home.html")
+    events = mycol.find({}, projection={"_id": 0}).sort(
+        [("date", pymongo.ASCENDING), ("time", pymongo.ASCENDING)]).limit(3)
+    return render_template("home.html", events=events)
 
 # view upcoming homework
 
