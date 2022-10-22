@@ -13,7 +13,7 @@ app.config['MONGODB_SETTINGS'] = {
 
 ##read connection string from env file
 ##db username,pw remove
-myclient = pymongo.MongoClient("mongodb+srv://shl622:Dltjdgus97!@cluster0.kakayag.mongodb.net/?retryWrites=true&w=majority")
+myclient = pymongo.MongoClient()
 mydb = myclient["shedule"]
 mycol = mydb["events"]
 
