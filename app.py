@@ -1,5 +1,6 @@
 from asyncio import events
 import json
+from multiprocessing import Event
 from django.shortcuts import render
 from flask import Flask, request, redirect, jsonify, render_template, url_for
 import pymongo
@@ -32,7 +33,9 @@ def home_page():
 
 @app.route('/view_homework', methods=['GET'])
 def show_homework():
-    return render_template("homework.html")
+    events = mycol.find({"tag": "homework"}, projection={"_id": 0}).sort(
+        [("date", pymongo.ASCENDING), ("time", pymongo.ASCENDING)]).limit(3)
+    return render_template("homework.html", events=events)
 
 # view upcoming exams
 
