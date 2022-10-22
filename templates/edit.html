@@ -1,0 +1,15 @@
+{% extends index.html %} {% block modal%}
+<h2>Edit your task</h2>
+<form
+  action="{{ url_for('create_record', event_name=event['name']) }}"
+  method="POST"
+  role="form"
+>
+  <div>
+    <input type="text" name="name" placeholder="Add task?" /> <br />
+    <input type="date" name="task-date" /> <br />
+    <input type="time" name="task-time" /> <br />
+    <button type="submit">Add Task</button>
+  </div>
+</form>
+{%endblock%}
