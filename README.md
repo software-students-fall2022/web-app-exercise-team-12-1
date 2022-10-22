@@ -23,8 +23,8 @@ A web application where students can manage schedule on a daily or monthly basis
 <span>4.</span> As a user, I want to view my schedule in calendar mode so that I can view all events on a monthly basis.</br>
 <span>5.</span> As a user, I want to view my schedule for a certain day so that I can only see the events on a daily basis.</br>
 <span>6.</span> As a user, I want to edit the event information so that I can add or remove any detail.</br>
-<span>7.</span> As a user, I want to add color tags to events so that I can specify the category of the event.</br>
-<span>8.</span> As a user, I want to get notifications for events so that I am reminded of the events that are added.</br>
+<span>7.</span> As a user, I want to add tags to events so that I can specify the category of the event.</br>
+
 
 ## Task boards
 
