@@ -1,5 +1,6 @@
 from asyncio import events
 import json
+from django.shortcuts import render
 from flask import Flask, request, redirect, jsonify, render_template, url_for
 import pymongo
 
@@ -11,43 +12,59 @@ app.config['MONGODB_SETTINGS'] = {
     'port': 27017
 }
 
-##read connection string from env file
-##db username,pw remove
+# read connection string from env file
+# db username,pw remove
 myclient = pymongo.MongoClient()
 mydb = myclient["shedule"]
 mycol = mydb["events"]
 
-# view options/home page 
-@app.route('/',methods=['GET'])
-def home_page():
-    return render_template("home.html")
+# view options/home page
 
-#view upcoming homework
-@app.route('/view_homework',methods=['GET'])
+
+@app.route('/', methods=['GET'])
+def home_page():
+    events = mycol.find({}, projection={"_id": 0}).sort(
+        [("date", pymongo.ASCENDING), ("time", pymongo.ASCENDING)]).limit(3)
+    return render_template("home.html", events=events)
+
+# view upcoming homework
+
+
+@app.route('/view_homework', methods=['GET'])
 def show_homework():
     return render_template("homework.html")
 
-#view upcoming exams
-@app.route('/view_exam',methods=['GET'])
+# view upcoming exams
+
+
+@app.route('/view_exam', methods=['GET'])
 def show_exam():
     return render_template("exam.html")
 
-#view upcoming interviews
-@app.route('/view_interview',methods=['GET'])
+# view upcoming interviews
+
+
+@app.route('/view_interview', methods=['GET'])
 def show_interview():
     return render_template("interview.html")
 
-#view upcoming misc
-@app.route('/view_misc',methods=['GET'])
+# view upcoming misc
+
+
+@app.route('/view_misc', methods=['GET'])
 def show_misc():
     return render_template("misc.html")
 
 #view in calendar
-@app.route('/calendar_view',methods=['GET'])
+
+
+@app.route('/calendar_view', methods=['GET'])
 def show_calendar():
     return render_template("calendarView.html")
 
 # add event(get)
+
+
 @app.route('/add_event', methods=['GET'])
 def add_task():
     events = mycol.find({}, projection={"_id": 0}).sort(
@@ -55,6 +72,8 @@ def add_task():
     return render_template("addevent.html", events=events)
 
 # add event(post)
+
+
 @app.route('/add_event', methods=['POST'])
 def create_record():
     event = {
@@ -70,14 +89,15 @@ def create_record():
     return redirect(url_for('home_page'))
 
 # edit the event
+
+
 @ app.route('/update_record/<event_name>', methods=['POST'])
 def update_record(event_name):
-    record = json.loads(request.data)
     myquery = {"name": event_name}
     newvalues = {
-        "$set": {"date": record["date"],
-                 "status": record["status"],
-                 "time": record["time"]}
+        "$set": {"date": request.form["task-date"],
+                 "status": request.form["status"],
+                 "time": request.form["task-time"]}
     }
     event = mycol.update_one(myquery, newvalues)
     if not event:
