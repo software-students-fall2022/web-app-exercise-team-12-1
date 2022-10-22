@@ -78,7 +78,7 @@ def add_task():
 def create_record():
     event = {
         "name":  request.form['name'],
-        "date":  request.form['task-date'],
+        "date": request.form['task-date'],
         "status": "active",
         "time":  request.form['task-time'],
         "tag": request.form['task-tag']
