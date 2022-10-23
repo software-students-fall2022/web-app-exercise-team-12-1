@@ -254,6 +254,9 @@ td {
   font-size: 14px;
   margin-top: 5px;
   flex-shrink: 0;
+  position:absolute;
+  bottom:0;
+  width: 100%;
 }
 
 .home-footer ul{
@@ -281,13 +284,40 @@ form{
   padding-top: 40px;
   display: inline-block;
 }
-#form{
+
+.add-container {
   text-align: center;
+  background-color: #FDF6B3;
+  position:absolute;
+  overflow:auto;
+  width: 100%;
+  top: 190px;
+  bottom: 59px;
 }
+
+.add-container input {
+  width: 150px;
+}
+
+.add-container button {
+  width: 100px;
+  height: 30px;
+  background-color: black;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.add-container button: :active {
+  transform: scale(0.98);
+}
+
 
 label, input, select{
   display: block;
 }
+
 label {
   margin-bottom: 5px;
 }

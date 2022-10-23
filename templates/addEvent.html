@@ -1,36 +1,37 @@
-{% extends "base.html" %} {% block content %}
-
-<body>
-  <header class="home-header">
-    <div class="container">
-      <img src="/static/icons/logo.png" alt="" class="logo" />
+{% extends "base.html" %} {% block header %}
+<header class="home-header">
+  <div class="container">
+    <img src="/static/icons/logo.png" alt="" class="logo" />
+  </div>
+</header>
+{% endblock %} {% block content %}
+<div class="add-container">
+  <form
+    id="form"
+    action="{{ url_for('create_record') }}"
+    method="POST"
+    role="form"
+  >
+    <div>
+      <label>
+        <input id="name" type="text" name="name" placeholder="Add task?" />
+        <br />
+      </label>
+      <label> <input id="date" type="date" name="task-date" /> <br /> </label>
+      <label> <input id="time" type="time" name="task-time" /> <br /> </label>
+      <label>
+        <select name="task-tag" id="tag">
+          <option value="" disabled selected hidden>
+            Choose a category...
+          </option>
+          <option value="homework">Homework</option>
+          <option value="exam">Exam</option>
+          <option value="interview">Interview</option>
+          <option value="misc">Misc.</option></select
+        ><br />
+      </label>
+      <button type="submit">Add Task</button>
     </div>
-  </header>
-    <body id="form">
-      <form action="{{ url_for('create_record') }}" method="POST" role="form">
-        <div>
-          <label>
-            <input id ="name" type="text" name="name" placeholder="Add task?" /> <br />
-          </label>
-          <label>
-            <input id ="date" type="date" name="task-date" /> <br />
-          </label>
-          <label>
-            <input id="time" type="time" name="task-time" /> <br />
-          </label>
-          <label>
-            <select name="task-tag" id="tag">
-              <option value="" disabled selected hidden>Choose a category...</option>
-              <option value="homework">Homework</option>
-              <option value="exam">Exam</option>
-              <option value="interview">Interview</option>
-              <option value="misc">Misc.</option></select
-            ><br />
-          </label>
-          <button type="submit"> Add Task </button>
-        </div>
-      </form>
-    </div>
-</body>
-
+  </form>
+</div>
 {% endblock %}
