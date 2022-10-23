@@ -5,7 +5,7 @@
   </div>
 </header>
 {% endblock %} {% block content %}
-<div class="content">
+<div class="sub-container">
   <table class="task-table">
     <h2 id="upcoming-task">Upcoming Homeworks:</h2>
     <thead>
@@ -27,7 +27,7 @@
         <td class="edit">
           <a href="{{ url_for('update_record', event_name=event['name']) }}">
             <input
-              class="edit-img"
+              id="edit-img"
               type="image"
               src="{{ url_for('static', filename='icons/edit button.png') }}"
               name="edit_bun"
@@ -37,7 +37,7 @@
         <td class="delete">
           <a href="{{ url_for('delete_record', event_name=event['name']) }}">
             <input
-              class="del-img"
+              id="del-img"
               type="image"
               src="{{ url_for('static', filename='icons/delete button.png') }}"
               name="delete-btn"
