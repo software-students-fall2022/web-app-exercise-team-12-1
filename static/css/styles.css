@@ -242,6 +242,11 @@ td {
   height: 20px;
 }
 
+.search-failed {
+  text-align: center;
+  margin-top: 20px;
+}
+
 .home-footer {
   background: #f4f4f4;
   color: #444;

@@ -3,7 +3,7 @@ import json
 from multiprocessing import Event
 from django.shortcuts import render
 from flask import Flask, request, redirect, jsonify, render_template, url_for
-from bson.json_util import dumps,loads
+from bson.json_util import dumps, loads
 import pymongo
 
 app = Flask(__name__)
@@ -67,9 +67,8 @@ def show_calendar():
     events = mycol.find({}, projection={"_id": 0}).sort(
         [("date", pymongo.ASCENDING), ("time", pymongo.ASCENDING)])
     list_cur = list(events)
-    json_data = loads(dumps(list_cur, indent=2))    
-    return render_template("calendarView.html",events=json_data)
-
+    json_data = loads(dumps(list_cur, indent=2))
+    return render_template("calendarView.html", events=json_data)
 
 
 # add event(get)
@@ -83,8 +82,10 @@ def add_task():
 # add event(post)
 @app.route('/add_event', methods=['POST'])
 def create_record():
+    name = request.form['name']
     event = {
-        "name":  request.form['name'],
+        "name": name,
+        "lower-name": name.lower(),
         "date": request.form['task-date'],
         "status": "active",
         "time":  request.form['task-time'],
@@ -104,7 +105,7 @@ def update_record(event_name):
         "$set": {"date": request.form["task-date"],
                  "status": request.form["status"],
                  "time": request.form["task-time"]
-                }
+                 }
     }
     event = mycol.update_one(myquery, newvalues)
     if not event:
@@ -131,8 +132,8 @@ def delete_all():
 # search for the event
 @ app.route('/search_record', methods=['POST', 'GET'])
 def query_records():
-    name = request.form["name"]
-    myquery = {"name": name}
+    name = request.form["name"].lower()
+    myquery = {"lower-name": name}
     events = mycol.find(myquery, projection={"_id": 0})
     if mycol.count_documents(myquery) == 0:
         find = 0
