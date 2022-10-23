@@ -134,15 +134,17 @@ def delete_all():
 
 
 # search for the event
-@ app.route('/search', methods=['GET'])
+@ app.route('/search_record', methods=['POST', 'GET'])
 def query_records():
-    name = request.args.get('name')
+    name = request.form["name"]
     myquery = {"name": name}
     events = mycol.find(myquery, projection={"_id": 0})
-    if not events:
-        return jsonify({'error': 'event not found'})
+    if mycol.count_documents(myquery) == 0:
+        find = 0
+        return render_template("search.html", events=events, find=find)
     else:
-        return jsonify(events)
+        find = 1
+        return render_template("search.html", events=events, find=find)
 
 
 if __name__ == "__main__":
