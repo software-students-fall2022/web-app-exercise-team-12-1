@@ -83,8 +83,10 @@ def add_task():
 # add event(post)
 @app.route('/add_event', methods=['POST'])
 def create_record():
+    name = request.form['name']
     event = {
-        "name":  request.form['name'],
+        "name": name,
+        "lower-name": name.lower(),
         "date": request.form['task-date'],
         "status": "active",
         "time":  request.form['task-time'],
@@ -131,8 +133,8 @@ def delete_all():
 # search for the event
 @ app.route('/search_record', methods=['POST', 'GET'])
 def query_records():
-    name = request.form["name"]
-    myquery = {"name": name}
+    name = request.form["name"].lower()
+    myquery = {"lower-name": name}
     events = mycol.find(myquery, projection={"_id": 0})
     if mycol.count_documents(myquery) == 0:
         find = 0

@@ -18,11 +18,13 @@
 </div>
 {% endblock %} {% block content %}
 <div class="content">
+  <!-- Display if search fails -->
   {% if (find == 0) %}
   <h1 class="search-failed">No results found</h1>
   <h3 class="search-failed">
     Please make sure you enter the name of the event correctly
   </h3>
+  <!-- Display results if search succeeds -->
   {% else %}
   <table class="task-table">
     <h2 id="upcoming-task">Search Results:</h2>
