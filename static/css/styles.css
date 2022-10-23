@@ -74,6 +74,7 @@ form.search button{
 form.search button:hover{
   background: #013220;
 }
+
 form.search::after{
   content: "";
   clear: both;
@@ -93,6 +94,7 @@ form.search::after{
   border: 1px #ccc solid;
   padding-bottom: 10px;
   box-shadow: 1px 1px 2px #ccc;
+  background-color: #FDF6B3;
 }
 
 .grid .item:active {
@@ -237,7 +239,7 @@ td {
   text-align: center;
 }
 
-.edit-img, .del-img {
+#edit-img, #del-img {
   width: 20px;
   height: 20px;
 }
@@ -285,7 +287,7 @@ form{
   display: inline-block;
 }
 
-.add-container {
+.sub-container {
   text-align: center;
   background-color: #FDF6B3;
   position:absolute;
@@ -295,11 +297,11 @@ form{
   bottom: 59px;
 }
 
-.add-container input {
+.sub-container input {
   width: 150px;
 }
 
-.add-container button {
+.sub-container button {
   width: 100px;
   height: 30px;
   background-color: black;
@@ -309,7 +311,7 @@ form{
   cursor: pointer;
 }
 
-.add-container button:active {
+.sub-container button:active {
   transform: scale(0.98);
 }
 
