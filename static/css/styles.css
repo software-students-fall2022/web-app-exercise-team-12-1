@@ -49,16 +49,19 @@ body{
   width:170px;
 }
 
+.searchbar{
+  display: flex;
+  background-color: white;
+}
+
 form.search input[type='text']{
   padding: 7px;
-  width: 250px;
+  width: 225px;
   border: 0;
   border-radius: 2px;
 }
 
 form.search button{
-  float:right;
-  margin-left: 5px;
   padding:7px;
   color: white;
   border:0;
@@ -272,4 +275,19 @@ td {
 .home-footer a{
   color:#013220;
   text-decoration: none;
+}
+
+form{
+  padding-top: 40px;
+  display: inline-block;
+}
+#form{
+  text-align: center;
+}
+
+label, input, select{
+  display: block;
+}
+label {
+  margin-bottom: 5px;
 }

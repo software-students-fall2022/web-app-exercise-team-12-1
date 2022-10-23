@@ -21,8 +21,7 @@ myclient = pymongo.MongoClient()
 mydb = myclient["shedule"]
 mycol = mydb["events"]
 
-
-# view options/home page
+#home page
 @app.route('/', methods=['GET'])
 def home_page():
     events = mycol.find({}, projection={"_id": 0}).sort(
@@ -77,7 +76,7 @@ def show_calendar():
 def add_task():
     events = mycol.find({}, projection={"_id": 0}).sort(
         [("date", pymongo.ASCENDING), ("time", pymongo.ASCENDING)])
-    return render_template("addevent.html", events=events)
+    return render_template("addEvent.html", events=events)
 
 
 # add event(post)
@@ -126,7 +125,7 @@ def delete_record(event_name):
 # delete all the events (for testing purpose)
 @ app.route('/clear')
 def delete_all():
-    mycol.delete_many({})
+    #mycol.delete_many({})
     return redirect(url_for('home_page'))
 
 
