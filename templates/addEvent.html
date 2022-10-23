@@ -1,4 +1,10 @@
-{% extends "base.html" %} {% block content %}
+{% extends "base.html" %} {% block header %}
+<header class="home-header">
+  <div class="container">
+    <img src="/static/icons/logo.png" alt="" class="logo" />
+  </div>
+</header>
+{% endblock %} {% block content %}
 <form action="{{ url_for('create_record') }}" method="POST" role="form">
   <div>
     <input type="text" name="name" placeholder="Add task?" /> <br />

@@ -92,6 +92,11 @@ form.search::after{
   box-shadow: 1px 1px 2px #ccc;
 }
 
+.grid .item:active {
+  transform: scale(0.98);
+
+}
+
 .grid .item h4{
   margin: 10px
 }
@@ -161,6 +166,10 @@ form.search::after{
 
 thead{
   border-bottom: 1px solid black;
+}
+
+th {
+  padding-bottom: 3px;
 }
 
 td {
