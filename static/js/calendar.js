@@ -1,3 +1,8 @@
+//format data 
+const eventsObj = JSON.parse(events.replace(/'/g, "\""))
+//console.log(eventsObj)
+//console.log(typeof eventsObj);
+
 //get number of days in a month
 function getDaysinMonth(year,month){
     return new Date(year,month,0).getDate();
@@ -25,6 +30,7 @@ const months = [
 ]
 
 const currentDate = new Date();
+const currentMonth = currentDate.getMonth();
 const currentYear = currentDate.getFullYear();
 const yearsArray = [currentYear,currentYear+1];
 
@@ -49,21 +55,87 @@ const calendarData = yearsArray.map(year =>{
     return {year,months:renderMonths(year)}
 });
 
+let calendarState = {
+    selectedYear:currentYear,
+    selectedMonth:currentMonth
+};
 
-/*
-[{}{}]
-look up dataset attribute html
-css grid
-document.createElement
-appendChild method
+function updateCalendarState(newState){
+    calendarState = {...calendarState,...newState}
+}
 
-<div id="year">
-    <div id="year-month">
-        <div class="grid">
-            *header(english days) can go either side
-                <div id="year-month-day" class="calendar day">
+const calendarYearEl = document.getElementById("calendarYear");
+const calendarMonthEl = document.getElementById("calendarMonth");
+console.log(calendarYearEl.children);
+calendarYearEl.children[0].textContent = calendarData[0].year;
+calendarYearEl.children[1].textContent = calendarData[1].year;
+calendarYearEl.children[0].value = calendarData[0].year;
+calendarYearEl.children[1].value = calendarData[1].year;
+const monthEls = Array.from(calendarMonthEl.children);
+
+monthEls.forEach((month,i)=>{
+    if (i === currentMonth){
+        month.setAttribute("selected","selected");
+    }
+    month.textContent = months[i].shortname;
+});
+
+const calendarContainerEl = document.getElementById("calendar");
+const weekDayEls = Array.from(calendarContainerEl.children);
+
+function renderCalendar(){
+    const selectedYearObj = calendarData.find((obj)=>obj.year===calendarState.selectedYear)
+    const selectedMonthObj = selectedYearObj.months[calendarState.selectedMonth];
+    console.log("month",selectedMonthObj);
+    calendarContainerEl.innerHTML = "";
+    weekDayEls.forEach((weekday)=>{
+        calendarContainerEl.appendChild(weekday);
+    });
+    const calendarDaysArray = [];
+    const emptyDaysArray = Array(selectedMonthObj.firstDay).fill("emptyday");
+    const totalDaysArray = [...emptyDaysArray,...selectedMonthObj.wholeMonth];
+    totalDaysArray.forEach((day,i)=> {
+        const dayEl = document.createElement("div");
+        dayEl.classList.add("day");
+        function getEvents(){
+        return eventsObj.filter((event)=> event.date===day.date).map((event)=>{
+            return `
+            <div class = "dayEvent">
+            <p>${event.name}</p>
+            <p>${event.time}</p>
+            </div>
+            `
+        });
+        }
+        if(day==="emptyday"){
+            dayEl.classList.add("emptyday");
+        }
+        else{
+            dayEl.innerHTML = `
+            <div>
+                <div>
+                <p>${i+1-selectedMonthObj.firstDay}</p>
                 </div>
-        </div>
-    </div>
-</div>
-*/
+                ${getEvents().join("")}
+            </div>`;
+        }
+        calendarContainerEl.appendChild(dayEl);
+    });
+}
+
+//update year
+calendarYearEl.onchange = function(event){
+    updateCalendarState({selectedYear:parseInt(event.target.value)})
+    renderCalendar();
+}
+
+//update month
+calendarMonthEl.onchange = function(event){
+    updateCalendarState({selectedMonth:parseInt(event.target.value)})
+    renderCalendar();
+}
+
+renderCalendar();
+
+
+

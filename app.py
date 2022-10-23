@@ -2,6 +2,7 @@ from asyncio import events
 import json
 from django.shortcuts import render
 from flask import Flask, request, redirect, jsonify, render_template, url_for
+from bson.json_util import dumps,loads
 import pymongo
 
 app = Flask(__name__)
@@ -60,7 +61,11 @@ def show_misc():
 
 @app.route('/calendar_view', methods=['GET'])
 def show_calendar():
-    return render_template("calendarView.html")
+    events = mycol.find({}, projection={"_id": 0}).sort(
+        [("date", pymongo.ASCENDING), ("time", pymongo.ASCENDING)])
+    list_cur = list(events)
+    json_data = loads(dumps(list_cur, indent=2))    
+    return render_template("calendarView.html",events=json_data)
 
 # add event(get)
 
@@ -97,7 +102,8 @@ def update_record(event_name):
     newvalues = {
         "$set": {"date": request.form["task-date"],
                  "status": request.form["status"],
-                 "time": request.form["task-time"]}
+                 "time": request.form["task-time"]
+                }
     }
     event = mycol.update_one(myquery, newvalues)
     if not event:
