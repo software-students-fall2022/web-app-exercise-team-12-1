@@ -19,7 +19,10 @@
 {% endblock %} {% block content %}
 <div class="content">
   {% if (find == 0) %}
-  <h1>No results found</h1>
+  <h1 class="search-failed">No results found</h1>
+  <h3 class="search-failed">
+    Please make sure you enter the name of the event correctly
+  </h3>
   {% else %}
   <table class="task-table">
     <h2 id="upcoming-task">Search Results:</h2>

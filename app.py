@@ -3,7 +3,7 @@ import json
 from multiprocessing import Event
 from django.shortcuts import render
 from flask import Flask, request, redirect, jsonify, render_template, url_for
-from bson.json_util import dumps,loads
+from bson.json_util import dumps, loads
 import pymongo
 
 app = Flask(__name__)
@@ -68,9 +68,8 @@ def show_calendar():
     events = mycol.find({}, projection={"_id": 0}).sort(
         [("date", pymongo.ASCENDING), ("time", pymongo.ASCENDING)])
     list_cur = list(events)
-    json_data = loads(dumps(list_cur, indent=2))    
-    return render_template("calendarView.html",events=json_data)
-
+    json_data = loads(dumps(list_cur, indent=2))
+    return render_template("calendarView.html", events=json_data)
 
 
 # add event(get)
@@ -98,18 +97,14 @@ def create_record():
 
 
 # edit the event
-<<<<<<< HEAD
-@ app.route('/update_record/<event_name>', methods=['POST'])
-=======
 @ app.route('/update_record/<event_name>', methods=['GET', 'POST'])
->>>>>>> origin
 def update_record(event_name):
     myquery = {"name": event_name}
     newvalues = {
         "$set": {"date": request.form["task-date"],
                  "status": request.form["status"],
                  "time": request.form["task-time"]
-                }
+                 }
     }
     event = mycol.update_one(myquery, newvalues)
     if not event:
