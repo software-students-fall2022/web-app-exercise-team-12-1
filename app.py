@@ -17,12 +17,11 @@ app.config['MONGODB_SETTINGS'] = {
 
 # read connection string from env file
 # db username,pw remove
-myclient = pymongo.MongoClient("mongodb+srv://shl622:Dltjdgus97!@cluster0.kakayag.mongodb.net/?retryWrites=true&w=majority")
+myclient = pymongo.MongoClient()
 mydb = myclient["shedule"]
 mycol = mydb["events"]
 
-
-# view options/home page
+#home page
 @app.route('/', methods=['GET'])
 def home_page():
     events = mycol.find({}, projection={"_id": 0}).sort(
@@ -78,7 +77,7 @@ def show_calendar():
 def add_task():
     events = mycol.find({}, projection={"_id": 0}).sort(
         [("date", pymongo.ASCENDING), ("time", pymongo.ASCENDING)])
-    return render_template("addevent.html", events=events)
+    return render_template("addEvent.html", events=events)
 
 
 # add event(post)
