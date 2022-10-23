@@ -1,79 +1,3 @@
-/*header {
-  justify-content: center;
-  text-align: center;
-  background-color: #6372BB;
-}
-
-header h1 {
-  margin: 0;
-  padding: 15px;
-  color: white;
-}
-
-body {
-  font-family: Arial, Helvetica, sans-serif;
-  margin: 0;
-  padding: 0;
-}
-
-body h2 {
-  text-align: center;
-}
-
-form { 
-  margin: auto; 
-  text-align: center;
-  padding-bottom: 20px;
-  width:150px;
-}
-
-input {
-  margin-bottom: 10px;
-}
-
-.task-table {
-  margin: auto;
-  table-layout: fixed;
-}
-
-th.task-name {
-  width: 110px;
-}
-
-th.due-time {
-  width: 50px;
-}
-
-th.due-date {
-  width: 100px;
-}
-
-th.edit, th.delete {
-  width: 50px;
-}
-
-.display-date, .display-time, .edit, .delete {
-  text-align: center;
-}
-
-.tasks{
-  margin: auto;
-  text-align: center;
-}
-
-.btn{
-  background-color: white;
-            border: 2px solid black;
-            color: green;
-            padding: 5px 10px;
-            text-align: center;
-            display: inline-block;
-            font-size: 20px;
-            margin: 10px 30px;
-            cursor: pointer;
-}
-*/
-
 :root{
   --primary-color: #AFE1AF;
 }
@@ -119,25 +43,25 @@ body{
   flex-direction: column;
   align-items:center;
   justify-content: center;
-  padding: 10px 10px;
 }
 
 .home-header .logo{
   width:170px;
-  margin-bottom:5px;
+}
+
+.searchbar{
+  display: flex;
+  background-color: white;
 }
 
 form.search input[type='text']{
   padding: 7px;
-  width: 300px;
+  width: 225px;
   border: 0;
   border-radius: 2px;
 }
 
 form.search button{
-  float:left;
-  margin-left:-10px;
-  width:10%;
   padding:7px;
   color: white;
   border:0;
@@ -167,12 +91,17 @@ form.search::after{
   display: flex;
   flex-direction: column;
   border: 1px #ccc solid;
-  padding: 10px;
+  padding-bottom: 10px;
   box-shadow: 1px 1px 2px #ccc;
 }
 
+.grid .item:active {
+  transform: scale(0.98);
+
+}
+
 .grid .item h4{
-  margin-bottom: 5px;
+  margin: 10px
 }
 
 .grid .item a{
@@ -188,7 +117,134 @@ form.search::after{
 
 .grid .item img{
   width: 30px;
+  margin-right: 5px;
   align-self: flex-end;
+}
+
+.item a {
+  display: flex;
+}
+
+#hw-color {
+  background-color: #F1A53A;
+  width: 100%;
+  height: 30px;
+  border-left: 2px solid lightgray;
+  border-bottom: 2px solid lightgray;
+}
+
+#exam-color {
+  background-color: #951DF6;
+  width: 100%;
+  height: 30px;
+  border-left: 2px solid glightgray;
+  border-bottom: 2px solid lightgray;
+}
+
+#interview-color {
+  background-color: #4EA834;
+  width: 100%;
+  height: 30px;
+  border-left: 2px solid lightgray;
+  border-bottom: 2px solid lightgray;
+}
+
+#misc-color {
+  background-color: #56BCF8;
+  width: 100%;
+  height: 30px;
+  border-left: 2px solid lightgray;
+  border-bottom: 2px solid lightgray;
+}
+
+#upcoming-task {
+  margin: 20px;
+}
+
+.task-table {
+  margin: auto;
+  margin-bottom: 5px;
+  border-collapse: collapse;
+}
+
+thead{
+  border-bottom: 1px solid black;
+}
+
+th {
+  padding-bottom: 3px;
+}
+
+td {
+  padding-top: 8px;
+  padding-left: 5px;
+}
+
+.main-display-name, .task-name {
+  max-width: 120px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.display-name {
+  max-width: 110px;
+}
+
+.display-time, .due-time {
+  width: 80px;
+  text-align: center;
+}
+
+.display-date, .due-date {
+  width: 100px;
+  text-align: center;
+}
+
+.display-tag {
+  width: 90px;
+  align-items: center;
+}
+
+.display-img {
+  width: 20px;
+  height: 20px;
+  text-align: center;
+}
+
+.task-cat {
+  width: 90px;
+  text-align: center;
+}
+
+.del-btn, .edit-btn, .edit, .delete {
+  width: 40px;
+  text-align: center;
+}
+
+.edit-img, .del-img {
+  width: 20px;
+  height: 20px;
+}
+
+.task-cat {
+  width: 90px;
+  text-align: center;
+}
+
+.del-btn, .edit-btn, .edit, .delete {
+  width: 40px;
+  text-align: center;
+}
+
+.edit-img, .del-img {
+  width: 20px;
+  height: 20px;
+}
+
+.search-failed {
+  text-align: center;
+  margin-top: 20px;
 }
 
 .home-footer {
@@ -196,8 +252,11 @@ form.search::after{
   color: #444;
   padding:10px;
   font-size: 14px;
-  margin-top: 10px;
+  margin-top: 5px;
   flex-shrink: 0;
+  position:absolute;
+  bottom:0;
+  width: 100%;
 }
 
 .home-footer ul{
@@ -219,4 +278,46 @@ form.search::after{
 .home-footer a{
   color:#013220;
   text-decoration: none;
+}
+
+form{
+  padding-top: 40px;
+  display: inline-block;
+}
+
+.add-container {
+  text-align: center;
+  background-color: #FDF6B3;
+  position:absolute;
+  overflow:auto;
+  width: 100%;
+  top: 190px;
+  bottom: 59px;
+}
+
+.add-container input {
+  width: 150px;
+}
+
+.add-container button {
+  width: 100px;
+  height: 30px;
+  background-color: black;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.add-container button: :active {
+  transform: scale(0.98);
+}
+
+
+label, input, select{
+  display: block;
+}
+
+label {
+  margin-bottom: 5px;
 }

@@ -1,0 +1,52 @@
+{% extends "base.html" %} {% block header %}
+<header class="home-header">
+  <div class="container">
+    <img src="/static/icons/logo.png" alt="" class="logo" />
+  </div>
+</header>
+{% endblock %} {% block content %}
+<div class="content">
+  <table class="task-table">
+    <h2 id="upcoming-task">Upcoming Miscellaneous:</h2>
+    <thead>
+      <tr>
+        <th class="task-name">Task</th>
+        <th class="due-time">Time</th>
+        <th class="due-date">Date</th>
+        <th class="edit-btn">Edit</th>
+        <th class="del-btn">Del</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for event in events %}
+      <tr>
+        <td class="display-name">{{ event["name"] }}</td>
+        <td class="display-time">{{ event["time"] }}</td>
+        <td class="display-date">{{ event["date"] }}</td>
+        <!-- Delete and Edit button -->
+        <td class="edit">
+          <a href="{{ url_for('update_record', event_name=event['name']) }}">
+            <input
+              class="edit-img"
+              type="image"
+              src="{{ url_for('static', filename='icons/edit button.png') }}"
+              name="edit_bun"
+            />
+          </a>
+        </td>
+        <td class="delete">
+          <a href="{{ url_for('delete_record', event_name=event['name']) }}">
+            <input
+              class="del-img"
+              type="image"
+              src="{{ url_for('static', filename='icons/delete button.png') }}"
+              name="delete-btn"
+            />
+          </a>
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endblock %}
