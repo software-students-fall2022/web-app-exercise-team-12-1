@@ -16,29 +16,40 @@
 
   <div class="grid container">
     <div class="item">
-      <a href="{{ url_for('show_homework') }}"> <h4>Homework</h4></a>
+      <a href="{{ url_for('show_homework') }}">
+        <h4>Homework</h4>
+        <p id="hw-color"></p>
+      </a>
       <p></p>
       <img src="/static/icons/homework.png" alt="" />
     </div>
     <div class="item">
-      <a href="{{ url_for('show_exam') }}"><h4>Exams</h4></a>
+      <a href="{{ url_for('show_exam') }}">
+        <h4>Exams</h4>
+        <p id="exam-color"></p>
+      </a>
       <p></p>
       <img src="/static/icons/exam.png" alt="" />
     </div>
     <div class="item">
-      <a href="{{ url_for('show_interview') }}"><h4>Interviews</h4></a>
+      <a href="{{ url_for('show_interview') }}">
+        <h4>Interviews</h4>
+        <p id="interview-color"></p>
+      </a>
       <p></p>
       <img src="/static/icons/interview.png" alt="" />
     </div>
     <div class="item">
-      <a href="{{ url_for('show_misc') }}"><h4>Misc</h4></a>
+      <a href="{{ url_for('show_misc') }}">
+        <h4>Misc</h4>
+        <p id="misc-color"></p>
+      </a>
       <p></p>
       <img src="/static/icons/misc.png" alt="" />
     </div>
   </div>
 </div>
 {% endblock %} {% block content %}
-<!-- List all tasks (FOR TESTING AND TRACKING)-->
 <table class="task-table">
   <h2 id="upcoming-task">Due soon:</h2>
   <thead>
@@ -65,7 +76,6 @@
         />
       </td>
     </tr>
-
     {% endfor %}
   </tbody>
 </table>
