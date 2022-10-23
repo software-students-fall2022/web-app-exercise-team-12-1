@@ -1,17 +1,35 @@
 {% extends "base.html" %} {% block content %}
-<form action="{{ url_for('create_record') }}" method="POST" role="form">
-  <div>
-    <input type="text" name="name" placeholder="Add task?" /> <br />
-    <input type="date" name="task-date" /> <br />
-    <input type="time" name="task-time" /> <br />
-    <select name="task-tag" id="tag">
-      <option value="" disabled selected hidden>Choose a category...</option>
-      <option value="homework">Homework</option>
-      <option value="exam">Exam</option>
-      <option value="interview">Interview</option>
-      <option value="misc">Misc.</option></select
-    ><br />
-    <button type="submit">Add Task</button>
-  </div>
-</form>
+
+<body>
+  <header class="home-header">
+    <div class="container">
+      <img src="/static/icons/logo.png" alt="" class="logo" />
+    </div>
+  </header>
+    <body id="form">
+      <form action="{{ url_for('create_record') }}" method="POST" role="form">
+        <div>
+          <label>
+            <input id ="name" type="text" name="name" placeholder="Add task?" /> <br />
+          </label>
+          <label>
+            <input id ="date" type="date" name="task-date" /> <br />
+          </label>
+          <label>
+            <input id="time" type="time" name="task-time" /> <br />
+          </label>
+          <label>
+            <select name="task-tag" id="tag">
+              <option value="" disabled selected hidden>Choose a category...</option>
+              <option value="homework">Homework</option>
+              <option value="exam">Exam</option>
+              <option value="interview">Interview</option>
+              <option value="misc">Misc.</option></select
+            ><br />
+          </label>
+          <button type="submit"> Add Task </button>
+        </div>
+      </form>
+    </div>
+</body>
 {% endblock %}
