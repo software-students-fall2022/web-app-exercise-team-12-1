@@ -12,13 +12,11 @@
         <button type="submit"><i class="fa fa-search"></i></button>
       </form>
     </div>
-    <!-- Delete all button -->
-    <a id="delete-all-btn" href="{{ url_for('delete_all') }}">Delete All</a>
   </header>
 
   <div class="grid container">
     <div class="item">
-      <a href="{{ url_for('show_homework') }}"><h4>Homework</h4></a>
+      <a href="{{ url_for('show_homework') }}"> <h4>Homework</h4></a>
       <p></p>
       <img src="/static/icons/homework.png" alt="" />
     </div>
@@ -57,8 +55,17 @@
       <td class="main-display-name">{{ event["name"] }}</td>
       <td class="display-time">{{ event["time"] }}</td>
       <td class="display-date">{{ event["date"] }}</td>
-      <td class="display-tag">{{ event["tag"] }}</td>
+
+      <td class="display-img">
+        <img
+          src="/static/icons/{{ event['tag'] }} tag.png"
+          alt="colorful dot to indicate the event tag"
+          height="20px"
+          width="20px"
+        />
+      </td>
     </tr>
+
     {% endfor %}
   </tbody>
 </table>

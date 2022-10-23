@@ -25,7 +25,7 @@ mycol = mydb["events"]
 @app.route('/', methods=['GET'])
 def home_page():
     events = mycol.find({}, projection={"_id": 0}).sort(
-        [("date", pymongo.ASCENDING), ("time", pymongo.ASCENDING)]).limit(3)
+        [("date", pymongo.ASCENDING), ("time", pymongo.ASCENDING)]).limit(5)
     return render_template("home.html", events=events)
 
 
@@ -92,7 +92,7 @@ def create_record():
 
 
 # edit the event
-@ app.route('/update_record/<event_name>', methods=['POST'])
+@ app.route('/update_record/<event_name>', methods=['GET', 'POST'])
 def update_record(event_name):
     myquery = {"name": event_name}
     newvalues = {
