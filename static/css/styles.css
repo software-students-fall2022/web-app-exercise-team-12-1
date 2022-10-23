@@ -24,6 +24,7 @@ body{
 }
 .content {
   flex: 1 0 auto;
+  overflow: auto;
 }
 
 .container {
@@ -256,7 +257,6 @@ td {
   font-size: 14px;
   margin-top: 5px;
   flex-shrink: 0;
-  position:absolute;
   bottom:0;
   width: 100%;
 }
@@ -290,8 +290,8 @@ form{
 .sub-container {
   text-align: center;
   background-color: #FDF6B3;
-  position:absolute;
-  overflow:auto;
+  position: absolute;
+  overflow: auto;
   width: 100%;
   top: 190px;
   bottom: 59px;
