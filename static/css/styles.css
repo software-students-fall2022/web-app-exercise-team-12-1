@@ -311,10 +311,9 @@ form{
   cursor: pointer;
 }
 
-.add-container button:active {
+.sub-container button:active {
   transform: scale(0.98);
 }
-
 
 label, input, select{
   display: block;
@@ -322,4 +321,18 @@ label, input, select{
 
 label {
   margin-bottom: 5px;
+}
+
+.calendarSelect {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 10px;
+  gap: 20px;
+}
+
+.calendarSelect select {
+  width: 150px;
+  height: 30px;
+  border: 1px solid lightgray;
+  border-radius: 5px;
 }
