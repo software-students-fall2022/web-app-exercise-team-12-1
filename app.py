@@ -21,7 +21,9 @@ myclient = pymongo.MongoClient()
 mydb = myclient["shedule"]
 mycol = mydb["events"]
 
-#home page
+# home page
+
+
 @app.route('/', methods=['GET'])
 def home_page():
     events = mycol.find({}, projection={"_id": 0}).sort(
@@ -96,7 +98,6 @@ def create_record():
         return jsonify({"message": "Error occured"}), 500
     return redirect(url_for('home_page'))
 
-# edit the event
 @ app.route('/update_record/<event_name>', methods=['GET'])
 def update_page(event_name):
     event = mycol.find_one({"name": event_name}, projection={"_id": 0})
@@ -114,7 +115,7 @@ def update_record(event_name):
         event = mycol.update_one(myquery, newvalues)
         if not event:
             return jsonify({'error': 'event not found'})
-        return redirect(url_for('home_page'))
+        return redirect(url_for(f'home_page'))
 
 
 # delete the event
@@ -129,7 +130,7 @@ def delete_record(event_name):
 # delete all the events (for testing purpose)
 @ app.route('/clear')
 def delete_all():
-    #mycol.delete_many({})
+    # mycol.delete_many({})
     return redirect(url_for('home_page'))
 
 

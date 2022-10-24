@@ -311,7 +311,11 @@ form{
   cursor: pointer;
 }
 
+<<<<<<< HEAD
 .sub-container button:active {
+=======
+.add-container button:active {
+>>>>>>> 6a30b433c6b98c3ccbacfce5eede584bb2014f83
   transform: scale(0.98);
 }
 
