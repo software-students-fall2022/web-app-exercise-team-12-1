@@ -309,7 +309,7 @@ form{
   cursor: pointer;
 }
 
-.add-container button: :active {
+.add-container button:active {
   transform: scale(0.98);
 }
 
