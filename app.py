@@ -17,7 +17,7 @@ app.config['MONGODB_SETTINGS'] = {
 
 # read connection string from env file
 # db username,pw remove
-myclient = pymongo.MongoClient()
+myclient = pymongo.MongoClient("mongodb+srv://shl622:Dltjdgus97!@cluster0.kakayag.mongodb.net/?retryWrites=true&w=majority")
 mydb = myclient["shedule"]
 mycol = mydb["events"]
 
@@ -96,21 +96,24 @@ def create_record():
         return jsonify({"message": "Error occured"}), 500
     return redirect(url_for('home_page'))
 
+@ app.route('/update_record/<event_name>', methods=['GET'])
+def update_page(event_name):
+    return render_template("edit.html", event = event_name)
 
 # edit the event
-@ app.route('/update_record/<event_name>', methods=['GET', 'POST'])
+@ app.route('/update_record/<event_name>', methods=['GET','POST'])
 def update_record(event_name):
-    myquery = {"name": event_name}
-    newvalues = {
-        "$set": {"date": request.form["task-date"],
-                 "status": request.form["status"],
-                 "time": request.form["task-time"]
-                 }
-    }
-    event = mycol.update_one(myquery, newvalues)
-    if not event:
-        return jsonify({'error': 'event not found'})
-    return redirect(url_for('home_page'))
+        myquery = {"name": event_name}
+        newvalues = {
+                    "$set" :{
+                        "date": request.form['task-date'],
+                        "time": request.form["task-time"],
+                    }
+        }
+        event = mycol.update_one(myquery, newvalues)
+        if not event:
+            return jsonify({'error': 'event not found'})
+        return redirect(url_for('home_page'))
 
 
 # delete the event
