@@ -21,7 +21,9 @@ myclient = pymongo.MongoClient()
 mydb = myclient["shedule"]
 mycol = mydb["events"]
 
-#home page
+# home page
+
+
 @app.route('/', methods=['GET'])
 def home_page():
     events = mycol.find({}, projection={"_id": 0}).sort(
@@ -96,24 +98,29 @@ def create_record():
         return jsonify({"message": "Error occured"}), 500
     return redirect(url_for('home_page'))
 
+
+# go to edit page
 @ app.route('/update_record/<event_name>', methods=['GET'])
 def update_page(event_name):
     event = mycol.find_one({"name": event_name}, projection={"_id": 0})
     return render_template("edit.html", event=event)
 
-@ app.route('/update_record/<event_name>', methods=['POST'])
+
+# edit the event
+@ app.route('/update_record/<event_name>', methods=['GET', 'POST'])
 def update_record(event_name):
-        myquery = {"name": event_name}
-        newvalues = {
-            "$set" :{
-                "date": request.form['task-date'],
-                "time": request.form["task-time"],
-            }
+    myquery = {"name": event_name}
+    newvalues = {
+        "$set": {
+            "date": request.form['task-date'],
+            "time": request.form["task-time"],
         }
-        event = mycol.update_one(myquery, newvalues)
-        if not event:
-            return jsonify({'error': 'event not found'})
-        return redirect(url_for(f'home_page'))
+    }
+    event = mycol.update_one(myquery, newvalues)
+    if not event:
+        return jsonify({'error': 'event not found'})
+    return redirect(url_for('home_page'))
+
 
 # delete the event
 @ app.route('/delete_record/<event_name>', methods=['GET', 'POST'])
