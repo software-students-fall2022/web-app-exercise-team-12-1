@@ -17,13 +17,13 @@ A web application where students can manage schedule on a daily or monthly basis
 
 ## User stories
 
-<span>1.</span> As a user, I want to add an event to a certain day so that I can view it later in the calendar.</br>
-<span>2.</span> As a user, I want to remove an event from a certain day so that I can update my calendar if schedules change.</br>
-<span>3.</span> As a user, I want to search for an event that I added so that I can directly access the specific event.</br>
-<span>4.</span> As a user, I want to view my schedule in calendar mode so that I can view all events on a monthly basis.</br>
-<span>5.</span> As a user, I want to edit the event information so that I can add or remove any detail.</br>
-<span>6.</span> As a user, I want to view all tasks for a specific category so that I can only see the events with a certain tag.</br>
-<span>7.</span> As a user, I want to add tags to events so that I can specify the category of the event.</br>
+<span>1.</span> As a user, I want to be able to add an event to my calender so that I can remember it or view it later on.</br>
+<span>2.</span> As a user, I want to be able to remove an event my calender so that I can update my calendar if my schedule changes.</br>
+<span>3.</span> As a user, I want to be able to search for a specific event in my calender so that I can access its details faster.</br>
+<span>4.</span> As a user, I want to be able to view all of my events in a calender so that I can view my entire schedule simultaenously and over the span of the entire month.</br>
+<span>5.</span> As a user, I want to be able to edit an event's details so that I can modify an event as needed.</br>
+<span>6.</span> As a user, I want to be able to view all the events within a specific category so that I can browse through the needed category and find events within that category more efficiently.</br>
+<span>7.</span> As a user, I want to be able to add tags to events so that I can specify the category of the event.</br>
 
 
 ## Task boards
