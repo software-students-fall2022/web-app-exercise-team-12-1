@@ -21,7 +21,9 @@ myclient = pymongo.MongoClient()
 mydb = myclient["shedule"]
 mycol = mydb["events"]
 
-#home page
+# home page
+
+
 @app.route('/', methods=['GET'])
 def home_page():
     events = mycol.find({}, projection={"_id": 0}).sort(
@@ -97,15 +99,22 @@ def create_record():
     return redirect(url_for('home_page'))
 
 
+# go to edit page
+@ app.route('/update_record/<event_name>', methods=['GET'])
+def update_page(event_name):
+    event = mycol.find_one({"name": event_name}, projection={"_id": 0})
+    return render_template("edit.html", event=event)
+
+
 # edit the event
 @ app.route('/update_record/<event_name>', methods=['GET', 'POST'])
 def update_record(event_name):
     myquery = {"name": event_name}
     newvalues = {
-        "$set": {"date": request.form["task-date"],
-                 "status": request.form["status"],
-                 "time": request.form["task-time"]
-                 }
+        "$set": {
+            "date": request.form['task-date'],
+            "time": request.form["task-time"],
+        }
     }
     event = mycol.update_one(myquery, newvalues)
     if not event:
@@ -125,7 +134,7 @@ def delete_record(event_name):
 # delete all the events (for testing purpose)
 @ app.route('/clear')
 def delete_all():
-    #mycol.delete_many({})
+    # mycol.delete_many({})
     return redirect(url_for('home_page'))
 
 
