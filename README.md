@@ -30,3 +30,10 @@ A web application where students can manage schedule on a daily or monthly basis
 
 [Sprint 1](https://github.com/orgs/software-students-fall2022/projects/21)\
 [Sprint 2](https://github.com/orgs/software-students-fall2022/projects/22)
+
+## Overview
+Run the app through terminal 
+<pre><code>python app.py
+</code></pre>
+<br/>
+Did not implement logins so must set up local database and paste URI string in line 20.
