@@ -1,0 +1,23 @@
+{% extends "base.html" %} {% block header %}
+<header class="home-header">
+  <div class="container">
+    <img src="/static/icons/logo.png" alt="" class="logo" />
+  </div>
+</header>
+{% endblock %} {% block content %}
+<div class="sub-container">
+  <form
+    id="form"
+    action="{{ url_for('update_record',event_name=event['name']) }}"
+    method="POST"
+    role="form"
+  >
+    <div>
+      <label> <input id="date" type="date" name="task-date" /> <br /> </label>
+      <label> <input id="time" type="time" name="task-time" /> <br /> </label>
+      <button type="submit">Confirm Edit</button>
+    </div>
+  </form>
+</div>
+
+{% endblock %}
